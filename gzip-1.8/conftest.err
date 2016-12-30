@@ -1,0 +1,4 @@
+conftest.c: In function 'main':
+conftest.c:79:20: error: expected expression before ')' token
+ if (sizeof ((pid_t)))
+                    ^
