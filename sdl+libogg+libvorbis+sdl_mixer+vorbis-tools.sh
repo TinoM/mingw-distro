@@ -2,22 +2,19 @@
 
 source ./0_append_distro_path.sh
 
-untar_file SDL2-2.0.6.tar
-untar_file libogg-1.3.2.tar
+untar_file SDL2-2.0.7.tar
+untar_file libogg-1.3.3.tar
 untar_file libvorbis-1.3.5.tar
-untar_file SDL2_mixer-2.0.1.tar --exclude=SDL2_mixer-2.0.1/Xcode
+untar_file SDL2_mixer-2.0.2.tar --exclude=SDL2_mixer-2.0.2/Xcode
 untar_file vorbis-tools-1.4.0.tar
-# extract_file SDL2_net-2.0.1.tar
-# extract_file SDL2_image-2.0.1.zip
-extract_file freetype-2.7.1.tar
-extract_file SDL2_ttf-2.0.14.zip
-# extract_file freetype-2.8.tar
+untar_file SDL2_image-2.0.2.tar --exclude=SDL2_image-2.0.2/Xcode
+untar_file SDL2_ttf-2.0.14.tar --exclude=SDL2_ttf-2.0.14/Xcode
 
-patch -d /c/temp/gcc/SDL2-2.0.6 -p1 < sdl-clipcursor.patch
+patch -d /c/temp/gcc/SDL2-2.0.7 -p1 < sdl-clipcursor.patch
 
-cd /c/data/Temp/gcc
+cd /c/Temp/gcc
 
-mv SDL2-2.0.6 src
+mv SDL2-2.0.7 src
 mkdir build dest
 cd build
 
@@ -29,76 +26,52 @@ make install
 cd /c/temp/gcc
 rm -rf build src
 
-# mv libogg-1.3.2 src
-# mkdir build
-# cd build
-
-../src/configure --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 \
---prefix=/c/temp/gcc/dest --disable-shared
-
-make $X_MAKE_JOBS all "CFLAGS=-s -O3"
-make install
-cd /c/temp/gcc
-rm -rf build src
-
-# mv libvorbis-1.3.5 src
-# mkdir build
-# cd build
-
-../src/configure --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 \
---prefix=/c/temp/gcc/dest --disable-shared
-
-make $X_MAKE_JOBS all "CFLAGS=-s -O3"
-make install
-cd /c/temp/gcc
-rm -rf build src
-
-# mv SDL2_mixer-2.0.1 src
-# mkdir build
-# cd build
-
-../src/configure --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 \
---prefix=/c/temp/gcc/dest --disable-shared
-
-make $X_MAKE_JOBS all "CFLAGS=-s -O3"
-make install
-cd /c/temp/gcc
-rm -rf build src
-
-# mv SDL2_net-2.0.1 src
-# mkdir build
-# cd build
-
-# ../src/configure --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 \
-# --prefix=/c/data/Temp/gcc/dest --disable-shared "CFLAGS=-s -O3" || fail_with SDL_net 1 - EPIC FAIL
-
-# make $X_MAKE_JOBS all || fail_with SDL_net 2 - EPIC FAIL
-# make install || fail_with SDL_net 3 - EPIC FAIL
-# cd /c/data/Temp/gcc
-# rm -rf build src
-
-# mv SDL2_image-2.0.1 src
-# mkdir build
-# cd build
-
-# ../src/configure --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 \
-# --prefix=/c/data/Temp/gcc/dest --disable-shared "CFLAGS=-s -O3" || fail_with SDL_image 1 - EPIC FAIL
-
-# make $X_MAKE_JOBS all || fail_with SDL_image 2 - EPIC FAIL
-# make install || fail_with SDL_image 3 - EPIC FAIL
-# cd /c/data/Temp/gcc
-# rm -rf build src
-
-mv freetype-2.7.1 src
-mkdir build dest
+mv libogg-1.3.3 src
+mkdir build
 cd build
 
-../src/configure --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --disable-shared \
---prefix=/c/temp/gcc/dest "CFLAGS=-s -O3" || fail_with freetype 1 - EPIC FAIL
+../src/configure --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 \
+--prefix=/c/temp/gcc/dest --disable-shared
 
-make $X_MAKE_JOBS all || fail_with freetype 2 - EPIC FAIL
-make install || fail_with freetype 3 - EPIC FAIL
+make $X_MAKE_JOBS all "CFLAGS=-s -O3"
+make install
 cd /c/temp/gcc
+rm -rf build src
+
+mv libvorbis-1.3.5 src
+mkdir build
+cd build
+
+../src/configure --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 \
+--prefix=/c/temp/gcc/dest --disable-shared
+
+make $X_MAKE_JOBS all "CFLAGS=-s -O3"
+make install
+cd /c/temp/gcc
+rm -rf build src
+
+mv SDL2_mixer-2.0.2 src
+mkdir build
+cd build
+
+../src/configure --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 \
+--prefix=/c/temp/gcc/dest --disable-shared
+
+make $X_MAKE_JOBS all "CFLAGS=-s -O3"
+make install
+cd /c/temp/gcc
+rm -rf build src
+
+mv SDL2_image-2.0.2 src
+mkdir build
+cd build
+
+../src/configure --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 \
+--prefix=/c/Temp/gcc/dest --disable-shared "CFLAGS=-s -O3" || fail_with SDL_image 1 - EPIC FAIL
+
+make $X_MAKE_JOBS all || fail_with SDL_image 2 - EPIC FAIL
+make install || fail_with SDL_image 3 - EPIC FAIL
+cd /c/Temp/gcc
 rm -rf build src
 
 mv SDL2_ttf-2.0.14 src
@@ -106,11 +79,11 @@ mkdir build
 cd build
 
 ../src/configure --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 \
---prefix=/c/data/Temp/gcc/dest --disable-shared "CFLAGS=-s -O3" || fail_with SDL_ttf 1 - EPIC FAIL
+--prefix=/c/Temp/gcc/dest --disable-shared "CFLAGS=-s -O3" || fail_with SDL_ttf 1 - EPIC FAIL
 
 make $X_MAKE_JOBS all || fail_with SDL_ttf 2 - EPIC FAIL
 make install || fail_with SDL_ttf 3 - EPIC FAIL
-cd /c/data/Temp/gcc
+cd /c/Temp/gcc
 rm -rf build src
 
 mv vorbis-tools-1.4.0 src
@@ -122,7 +95,7 @@ cd build
 
 make $X_MAKE_JOBS all "CFLAGS=-s -O3"
 make install
-cd /c/data/Temp/gcc
+cd /c/Temp/gcc
 rm -rf build src
 
 mv dest SDL+libogg+libvorbis+SDL_mixer+vorbis-tools
