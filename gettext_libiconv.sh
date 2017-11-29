@@ -21,7 +21,7 @@ cd /c/temp/gcc
 mv src libiconv-1.15
 rm -rf build 
 
-mv gettext-0.19.8 src
+mv gettext-0.19.8.1 src
 mkdir build
 cd build
 
