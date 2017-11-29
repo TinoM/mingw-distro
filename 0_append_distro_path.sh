@@ -6,7 +6,7 @@ set -u
 # Exit when a command fails.
 if [ "${PS1:-}" == "" ]; then set -e; fi
 
-export X_DISTRO_ROOT=/c/mingw
+export X_DISTRO_ROOT=/c/bin/mingw
 
 export X_DISTRO_BIN=$X_DISTRO_ROOT/bin
 export X_DISTRO_INC=$X_DISTRO_ROOT/include
