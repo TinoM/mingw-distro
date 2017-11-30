@@ -12,10 +12,10 @@ mkdir build
 cd build
 
 ../src/configure --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 \
---prefix=/c/temp/gcc/dest --disable-shared "CFLAGS=-s -O3" || fail_with LIBICONV 1 - EPIC FAIL
+--prefix=/c/temp/gcc/dest --disable-shared "CFLAGS=-s -O3" 
 
-make $X_MAKE_JOBS all || fail_with LIBICONV 2 - EPIC FAIL
-make install || fail_with LIBICONV 3 - EPIC FAIL
+make $X_MAKE_JOBS all 
+make install
 
 cd /c/temp/gcc
 mv src libiconv-1.15
@@ -26,10 +26,10 @@ mkdir build
 cd build
 
 ../src/configure --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 \
---prefix=/c/temp/gcc/dest --disable-shared --enable-static "CFLAGS=-s -O3" "CPPFLAGS=-DLIBXML_STATIC" || fail_with GETTEXT 1 - EPIC FAIL
+--prefix=/c/temp/gcc/dest --disable-shared --enable-static "CFLAGS=-s -O3" "CPPFLAGS=-DLIBXML_STATIC"
 
-make $X_MAKE_JOBS all || fail_with GETTEXT 2 - EPIC FAIL
-make install || fail_with GETTEXT 3 - EPIC FAIL
+make $X_MAKE_JOBS all
+make install
 cd /c/temp/gcc
 rm -rf build src
 
@@ -38,10 +38,10 @@ mkdir build
 cd build
 
 ../src/configure --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 \
---prefix=/c/temp/gcc/dest --disable-shared "CFLAGS=-s -O3" || fail_with LIBICONV 1 - EPIC FAIL
+--prefix=/c/temp/gcc/dest --disable-shared "CFLAGS=-s -O3"
 
-make $X_MAKE_JOBS all || fail_with LIBICONV 2 - EPIC FAIL
-make install || fail_with LIBICONV 3 - EPIC FAIL
+make $X_MAKE_JOBS all
+make install
 cd /c/temp/gcc
 rm -rf build src
 
