@@ -67,7 +67,7 @@ mkdir build
 cd build
 
 ../src/configure --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 \
---prefix=/c/Temp/gcc/dest --disable-shared "CFLAGS=-s -O3" || fail_with SDL_image 1 - EPIC FAIL
+--prefix=/c/Temp/gcc/dest --disable-shared "CFLAGS=-s -O3"
 
 make $X_MAKE_JOBS all || fail_with SDL_image 2 - EPIC FAIL
 make install || fail_with SDL_image 3 - EPIC FAIL
@@ -79,10 +79,10 @@ mkdir build
 cd build
 
 ../src/configure --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 \
---prefix=/c/Temp/gcc/dest --disable-shared "CFLAGS=-s -O3" || fail_with SDL_ttf 1 - EPIC FAIL
+--prefix=/c/Temp/gcc/dest --disable-shared "CFLAGS=-s -O3"
 
-make $X_MAKE_JOBS all || fail_with SDL_ttf 2 - EPIC FAIL
-make install || fail_with SDL_ttf 3 - EPIC FAIL
+make $X_MAKE_JOBS all
+make install
 cd /c/Temp/gcc
 rm -rf build src
 
