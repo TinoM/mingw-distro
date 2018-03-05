@@ -17,4 +17,4 @@ mv dest icu4c-60_2
 cd icu4c-60_2
 rm -rf bin lib/pkgconfig lib/*.la share
 
-7z -mx0 a ../icu4c-60_1.7z *
+7z -mx0 a ../icu4c-60_2.7z *
