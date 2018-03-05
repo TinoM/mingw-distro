@@ -2,19 +2,19 @@
 
 source ./0_append_distro_path.sh
 
-untar_file SDL2-2.0.7.tar
+untar_file SDL2-2.0.8.tar
 untar_file libogg-1.3.3.tar
 untar_file libvorbis-1.3.5.tar
 untar_file SDL2_mixer-2.0.2.tar --exclude=SDL2_mixer-2.0.2/Xcode
 untar_file vorbis-tools-1.4.0.tar
-untar_file SDL2_image-2.0.2.tar --exclude=SDL2_image-2.0.2/Xcode
+untar_file SDL2_image-2.0.3.tar --exclude=SDL2_image-2.0.3/Xcode
 untar_file SDL2_ttf-2.0.14.tar --exclude=SDL2_ttf-2.0.14/Xcode
 
-patch -d /c/temp/gcc/SDL2-2.0.7 -p1 < sdl-clipcursor.patch
+patch -d /c/temp/gcc/SDL2-2.0.8 -p1 < sdl-clipcursor.patch
 
 cd /c/Temp/gcc
 
-mv SDL2-2.0.7 src
+mv SDL2-2.0.8 src
 mkdir build dest
 cd build
 
@@ -62,7 +62,7 @@ make install
 cd /c/temp/gcc
 rm -rf build src
 
-mv SDL2_image-2.0.2 src
+mv SDL2_image-2.0.3 src
 mkdir build
 cd build
 
