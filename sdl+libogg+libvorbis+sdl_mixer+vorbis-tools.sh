@@ -10,8 +10,6 @@ untar_file vorbis-tools-1.4.0.tar
 untar_file SDL2_image-2.0.3.tar --exclude=SDL2_image-2.0.3/Xcode
 untar_file SDL2_ttf-2.0.14.tar --exclude=SDL2_ttf-2.0.14/Xcode
 
-patch -d /c/temp/gcc/SDL2-2.0.8 -p1 < sdl-clipcursor.patch
-
 cd /c/temp/gcc
 
 mv SDL2-2.0.9 src
