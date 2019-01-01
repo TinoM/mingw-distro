@@ -4,48 +4,46 @@ source ./0_append_distro_path.sh
 
 # Extract vanilla sources.
 untar_file gmp-6.1.2.tar
-untar_file mpfr-3.1.6.tar
+untar_file mpfr-4.0.1.tar
 untar_file mpc-1.1.0.tar
-untar_file isl-0.18.tar
-untar_file mingw-w64-v5.0.3.tar
-untar_file gcc-7.3.0.tar
+untar_file isl-0.20.tar
+untar_file mingw-w64-v6.0.0.tar
+untar_file gcc-8.2.0.tar
 
-patch -Z -d /c/temp/gcc/mpfr-3.1.6 -p1 < mpfr.patch
+# Fixed upstream: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=86724
+patch -d /c/temp/gcc/gcc-8.2.0 -p1 < gcc-bug-86724.patch
+
+patch -Z -d /c/temp/gcc/mpfr-4.0.1 -p1 < mpfr-4.0.1-p13.patch
 
 cd /c/temp/gcc
 
-# Build winpthreads and mingw-w64.
-mv mingw-w64-v5.0.3 src
-mkdir build-winpthreads build-mingw-w64 dest
-
-cd build-winpthreads
-
-../src/mingw-w64-libraries/winpthreads/configure \
---build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 \
---prefix=/c/temp/gcc/dest/x86_64-w64-mingw32 --with-sysroot=/c/temp/gcc/dest/x86_64-w64-mingw32 \
---disable-shared
-
-make $X_MAKE_JOBS all "CFLAGS=-s -O3"
-make install
-cd /c/temp/gcc
-
+# Build mingw-w64 and winpthreads.
+mv mingw-w64-v6.0.0 src
+mkdir build-mingw-w64 dest
 cd build-mingw-w64
 
 ../src/configure --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --disable-lib32 \
---prefix=/c/temp/gcc/dest/x86_64-w64-mingw32 --with-sysroot=/c/temp/gcc/dest/x86_64-w64-mingw32 --enable-wildcard
+--prefix=/c/temp/gcc/dest/x86_64-w64-mingw32 --with-sysroot=/c/temp/gcc/dest/x86_64-w64-mingw32 --enable-wildcard \
+--with-libraries=winpthreads --disable-shared
+
+# https://github.com/StephanTLavavej/mingw-distro/issues/64
+cd mingw-w64-headers
+make $X_MAKE_JOBS all "CFLAGS=-s -O3"
+make $X_MAKE_JOBS install
+cd /c/temp/gcc/build-mingw-w64
 
 make $X_MAKE_JOBS all "CFLAGS=-s -O3"
-make install
+make $X_MAKE_JOBS install
 cd /c/temp/gcc
 
-rm -rf build-winpthreads build-mingw-w64 src
+rm -rf build-mingw-w64 src
 
 # Prepare to build gcc.
-mv gcc-7.3.0 src
+mv gcc-8.2.0 src
 mv gmp-6.1.2 src/gmp
-mv mpfr-3.1.6 src/mpfr
+mv mpfr-4.0.1 src/mpfr
 mv mpc-1.1.0 src/mpc
-mv isl-0.18 src/isl
+mv isl-0.20 src/isl
 
 # Prepare to build gcc - perform magic directory surgery.
 cp -r dest/x86_64-w64-mingw32/lib dest/x86_64-w64-mingw32/lib64
@@ -82,7 +80,7 @@ cd build
 make $X_MAKE_JOBS bootstrap "CFLAGS=-g0 -O3" "CXXFLAGS=-g0 -O3" "CFLAGS_FOR_TARGET=-g0 -O3" \
 "CXXFLAGS_FOR_TARGET=-g0 -O3" "BOOT_CFLAGS=-g0 -O3" "BOOT_CXXFLAGS=-g0 -O3"
 
-make install
+make $X_MAKE_JOBS install
 
 # Cleanup.
 cd /c/temp/gcc
