@@ -26,7 +26,7 @@ cd /c/temp/gcc
 rm -rf build src
 mv dest glbinding-2.1.4
 cd glbinding-2.1.4
-rm -rf cmake AUTHORS glbinding-config.cmake README.md VERSION
+rm -rf AUTHORS README.md VERSION
 mv LICENSE include/glbinding
 
 7z -mx0 a ../glbinding-2.1.4.7z *
